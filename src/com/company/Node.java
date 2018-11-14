@@ -9,6 +9,24 @@ public class Node<T> {
     private int[][] data;
     private List<Node<T>> children = new ArrayList<>();
     private Node<T> parent = null;
+    private int knucklesNotInPlace;
+    private int manhatten;
+
+    public int getManhatten() {
+        return manhatten;
+    }
+
+    public void setManhatten(int manhatten) {
+        this.manhatten = manhatten;
+    }
+
+    public int getKnucklesNotInPlace() {
+        return knucklesNotInPlace;
+    }
+
+    public void setKnucklesNotInPlace(int knucklesNotInPlace) {
+        this.knucklesNotInPlace = knucklesNotInPlace;
+    }
 
     public Node(int[][] data) {
         this.data = data;
