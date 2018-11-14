@@ -3,9 +3,10 @@ package com.company.Methods;
 import com.company.Node;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class BFS {
+public class DFS {
 
     private static List<Node<int[][]>> visitedNodes = new ArrayList<>();
 
@@ -31,6 +32,7 @@ public class BFS {
     }
 
     public static void autoSolution(Node<int[][]> initNode, Node<int[][]> target) {
+        long startTime = System.currentTimeMillis();
         Stack<Node<int[][]>> stack = new Stack<>();
         stack.add(initNode);
         while (!stack.isEmpty()) {
@@ -44,21 +46,19 @@ public class BFS {
                 for (int i = 0; i < neighbours.size(); i++) {
                     Node<int[][]> n = neighbours.get(i);
                     if (n != null && !contains(visitedNodes, n)) {
-                        stack.add(n);
-                        if (stack.search(target) != -1) {
-                            System.out.println("Steps count until target will be reached is " + stack.search(target));
-                        }
+                        stack.push(n);
                     } else if (n != null && contains(visitedNodes, n)) {
                         System.out.println("This node is already visited: " + Arrays.deepToString(n.getData()));
                     }
                 }
             } else {
-                System.out.println("Solution is founded:");
-                System.out.println(Arrays.deepToString(element.getData()));
-                while (element.hasParent()) {
-                    element = element.getParent();
-                    System.out.println(Arrays.deepToString(element.getData()));
-                }
+                System.out.println("Steps count is:" + String.valueOf(visitedNodes.size()));
+                long endTime = System.currentTimeMillis();
+                System.out.println("Solution is founded. Time spent is " + String.format("%d min, %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes(endTime - startTime),
+                        TimeUnit.MILLISECONDS.toSeconds(endTime - startTime) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(endTime - startTime))
+                ));
                 break;
             }
         }
@@ -82,12 +82,7 @@ public class BFS {
                 for (int i = 0; i < neighbours.size(); i++) {
                     Node<int[][]> n = neighbours.get(i);
                     if (n != null && !contains(visitedNodes, n)) {
-                        stack.add(n);
-                        if (stack.search(target) != -1) {
-                            System.out.println("Steps count until target will be reached is " + stack.search(target));
-                            System.out.println("Press Enter Key To Continue...");
-                            new java.util.Scanner(System.in).nextLine();
-                        }
+                        stack.push(n);
                     } else if (n != null && contains(visitedNodes, n)) {
                         System.out.println("This node is already visited: " + Arrays.deepToString(n.getData()));
                         System.out.println("Press Enter Key To Continue...");
@@ -95,12 +90,8 @@ public class BFS {
                     }
                 }
             } else {
-                System.out.println("Solution is founded:");
-                System.out.println(Arrays.deepToString(element.getData()));
-                while (element.hasParent()) {
-                    element = element.getParent();
-                    System.out.println(Arrays.deepToString(element.getData()));
-                }
+                System.out.println("Steps count is:" + String.valueOf(visitedNodes.size()));
+                System.out.println("Solution is founded");
                 break;
             }
         }
