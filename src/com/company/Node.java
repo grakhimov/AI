@@ -32,12 +32,6 @@ public class Node<T> {
         this.data = data;
     }
 
-    public Node<T> addChild(Node<T> child) {
-        child.setParent(this);
-        this.children.add(child);
-        return child;
-    }
-
     public void addChildren(List<Node<T>> children) {
         children.forEach(each -> each.setParent(this));
         this.children.addAll(children);
@@ -47,16 +41,8 @@ public class Node<T> {
         return data;
     }
 
-    public Node<T> getParent() {
-        return parent;
-    }
-
     public void setParent(Node<T> parent) {
         this.parent = parent;
-    }
-
-    public boolean hasParent() {
-        return this.getParent() != null;
     }
 
     @Override
